@@ -1,1 +1,110 @@
-/* You can add global styles to this file, and also import other style files */
+
+:root{
+  --primary-color:#48003f; /*4d1108*/
+  --third-color:#78266d; /*4d1108*/
+  --secondary-color:#5D3F6A; /*  834112 */
+  --lightSecondary-color:#c1b4c7; /*  9b661cdd */
+  --black:#0e172c;
+  --white:#eee;
+  --light-color:#666;
+  --box-shadow:0 .5rem 1.5rem rgba(0,0,0,.1);
+
+    --primary-light-hsl: 282, 25%, 33%; /*180, 100%, 33% */
+    --primary-hsl:281, 24%, 49%; /*180, 100%, 25%*/
+    --primary-dark-hsl:308, 100%, 10% ; /*180, 100%, 17%*/
+    --third-color-hsl:308, 52%, 31%;
+
+    --success-hsl: 100, 60%, 50%;
+    --error-hsl: 0, 60%, 50%;
+
+    --primary-rgba:33,63,29;
+    --secondary-rgba:30,35,29;
+    --third-rgba:190, 144, 212;
+
+    --ticket-color:#555562;
+    --ticket-respond-color:#86818a;
+}
+
+body {
+  margin:0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f4f4f9;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+.flex-column-start{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  gap:10px;
+}
+.flex-column{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap:10px;
+}
+.flex-row-start{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap:10px;
+}
+.flex-row{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:10px;
+}
+
+label{
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.p{
+  font-size: 1.2rem;
+  font-weight: 400;
+  color:black;
+  word-break: break-word;
+}
+.h5{
+  font-size: 1.5rem;
+  font-weight: 550;
+  color:black;
+}
+.h3{
+  font-size: 1.7rem;
+  font-weight: 600;
+  color:black;
+}
+.h1{
+  font-size: 2rem;
+  font-weight: 600;
+  color:black;
+}
+.round-image{
+  width:50px;
+  height:50px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+
+.odd-even:nth-child(even) {
+  background: rgb(107, 107, 107);
+}
+.odd-even:nth-child(odd) {
+  background: #f4f4f9;
+}
+.main-container{
+  margin-top: 100px;
+}

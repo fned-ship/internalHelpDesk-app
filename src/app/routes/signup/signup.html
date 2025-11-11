@@ -1,0 +1,163 @@
+<div class="full-screen-container">
+  <div class="login-container">
+    <h1
+      [ngClass]="headerMsg === 'Welcome' ? 'login-title' : 'login-title success'"
+      id="errorMsg"
+    >
+      {{ headerMsg }}
+    </h1>
+
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="form">
+      <!-- First Name -->
+      <div class="input-group">
+        <input
+          type="text"
+          id="firstName"
+          placeholder="first name"
+          formControlName="firstName"
+          required
+        />
+      </div>
+
+      <!-- Last Name -->
+      <div class="input-group">
+        <input
+          type="text"
+          id="lastName"
+          placeholder="last name"
+          formControlName="lastName"
+          required
+        />
+      </div>
+
+      <!-- Birth Day -->
+      <div class="input-group" style="flex-direction: column; align-items: center">
+        <span style="font-size: 1.3em; color: #777777; margin-top: 20px">birth day</span>
+        <input
+          type="date"
+          id="birth"
+          style="width: 100%"
+          formControlName="birthDay"
+          required
+        />
+      </div>
+
+      <!-- Job -->
+      <div class="input-group" style="flex-direction: column; align-items: center">
+        <input
+          type="text"
+          id="job"
+          style="width: 100%"
+          placeholder="job"
+          formControlName="job"
+          required
+        />
+      </div>
+
+      <!-- Address -->
+      <div class="input-group" style="flex-direction: column; align-items: center">
+        <input
+          type="text"
+          id="address"
+          style="width: 100%"
+          placeholder="address"
+          formControlName="address"
+          required
+        />
+      </div>
+
+      <!-- Phone -->
+      <div class="input-group" style="flex-direction: column; align-items: center">
+        <span style="font-size: 1.3em; color: #777777; margin-top: 20px">phone number</span>
+        <input
+          type="tel"
+          id="number"
+          style="width: 100%"
+          placeholder="Enter phone number"
+          formControlName="number"
+          required
+        />
+      </div>
+
+      <!-- CIN -->
+      <div class="input-group" style="flex-direction: column; align-items: center">
+        <input
+          type="number"
+          id="cin"
+          style="width: 100%"
+          placeholder="ID card"
+          formControlName="cin"
+          required
+        />
+      </div>
+
+      <!-- Email -->
+      <div
+        class="input-group"
+        [ngClass]="{ error: emailErrMsg !== '' }"
+      >
+        <input
+          type="email"
+          id="email"
+          placeholder="email"
+          formControlName="email"
+          required
+        />
+        <span class="msg">{{ emailErrMsg }}</span>
+      </div>
+
+      <!-- Password -->
+      <div
+        class="input-group"
+        [ngClass]="{ error: pswdErrMsg !== '' }"
+        style="position: relative"
+      >
+        <div
+          class="slash"
+          [style.display]="slashDisplay"
+          (click)="togglePassword()"
+        ></div>
+        <img
+          src="svg/eye.svg"
+          width="30"
+          height="30"
+          alt="eye"
+          (click)="togglePassword()"
+          style="cursor: pointer"
+        />
+        <input
+          [type]="passwordType"
+          id="password"
+          placeholder="password"
+          formControlName="password"
+          required
+        />
+        <span class="msg">{{ pswdErrMsg }}</span>
+      </div>
+
+      <!-- Profile Picture -->
+      <div class="input-file">
+        <label for="inputTag">
+          Select profile picture <br />
+          <img src="svg/camera.svg" alt="camera" />
+          <input
+            id="inputTag"
+            accept="image/*"
+            type="file"
+            (change)="handleFileChange($event)"
+          />
+          <br />
+          <span
+            id="imageName"
+            [style.color]="ImageNameColor"
+            style="word-break: break-word"
+            >{{ imageName }}</span
+          >
+        </label>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" class="sign-up-button">sign up</button>
+    </form>
+  </div>
+</div>
