@@ -1,0 +1,80 @@
+<div class="chat-container">
+  <div class="messages-wrapper" 
+       #messageContainer
+       (scroll)="onScroll($event)">
+    
+    <!-- Loading indicator for older messages -->
+    <div *ngIf="isLoading" class="loading-indicator">
+      <div class="spinner"></div>
+    </div>
+
+    <!-- Messages -->
+    <div *ngFor="let message of messages" 
+         [ngClass]="{'message-wrapper': true, 'my-message': isMyMessage(message), 'other-message': !isMyMessage(message)}">
+      
+      <div class="message-content">
+        <div class="message-time">{{ formatTime(message.timestamp) }}</div>
+        
+        <div class="message-bubble">
+          <!-- Text content -->
+          <p *ngIf="message.text" class="message-text">{{ message.text }}</p>
+          
+          <!-- Images -->
+          <div *ngIf="message.imagesFiles && message.imagesFiles.length > 0" class="images-grid">
+            <div *ngFor="let image of message.imagesFiles" class="image-wrapper">
+              <img [src]="backendUrl + image" alt="Image" (click)="downloadFile(image)">
+            </div>
+          </div>
+          
+          <!-- Other files -->
+          <div *ngIf="message.otherFiles && message.otherFiles.length > 0" class="files-list">
+            <div *ngFor="let file of message.otherFiles" 
+                 class="file-item"
+                 (click)="downloadFile(file)">
+              <img src="images/chat_file.png" alt="File" class="file-icon">
+              <span class="file-name">{{ getFileName(file) }}</span>
+              <button class="close-btn">×</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Selected files preview -->
+  <div *ngIf="selectedFiles.length > 0" class="selected-files-preview">
+    <div *ngFor="let file of selectedFiles; let i = index" class="preview-item">
+      <img *ngIf="file.type.startsWith('image')" 
+           [src]="sanitizeUrl(file)" 
+           alt="Preview">
+      <div *ngIf="!file.type.startsWith('image')" class="file-preview">
+        <img src="images/chat_file.png" alt="File">
+        <span>{{ file.name }}</span>
+      </div>
+      <button class="remove-file-btn" (click)="removeFile(i)">×</button>
+    </div>
+  </div>
+
+  <!-- Input area -->
+  <div class="input-area">
+    <button class="attach-btn" (click)="openFilePicker()">
+      <img src="images/chat_attach.png" alt="Attach">
+    </button>
+    
+    <input type="file" 
+           #fileInput
+           multiple
+           (change)="onFileSelected($event)"
+           style="display: none;">
+    
+    <input type="text" 
+           [(ngModel)]="newMessage"
+           (keyup.enter)="sendMessage()"
+           placeholder="type a message ..."
+           class="message-input">
+    
+    <button class="send-btn" (click)="sendMessage()">
+      <img src="images/chat_send.png" alt="Send">
+    </button>
+  </div>
+</div>

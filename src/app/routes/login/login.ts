@@ -68,9 +68,14 @@ export class Login {
 
             const user = res.user;
             if (user.isActive) {
-              // Store cookies
-              this.cookieService.set('user', JSON.stringify(user), { expires: 3 });
-              this.router.navigateByUrl('/signup');
+              if(user.isAccepted){
+                // Store cookies
+                this.cookieService.set('user', JSON.stringify(user), { expires: 3 });
+                this.router.navigateByUrl('/signup');
+              }else{
+                this.errorClass = 'login-title err';
+                this.errorMsg = "Your account has not been verified from the admin yet !";
+              }
             } else {
               this.errorClass = 'login-title err';
               this.errorMsg = 'Please activate your account first. A verification code was sent to your email.';
