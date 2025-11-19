@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { io, Socket } from 'socket.io-client';
+import { environment } from '../../../environments/environment';
 
 //e.g <app-chat-box [chatId]="'chat1'" [userId]="'emp10'"></app-chat-box>
 
@@ -31,13 +32,15 @@ interface Chat {
 
 export class ChatBox implements OnInit, OnDestroy, AfterViewChecked {
   @Input() chatId!: string;
+  // chatId="chat1"
+  // userId="emp10"
   @Input() userId!: string;
   
   @ViewChild('messageContainer') private messageContainer!: ElementRef;
   @ViewChild('fileInput') private fileInput!: ElementRef;
   
   private socket!: Socket;
-  backendUrl = 'http://localhost:3003';
+  backendUrl = environment.serverURL;
   
   messages: Message[] = [];
   newMessage: string = '';
@@ -53,7 +56,7 @@ export class ChatBox implements OnInit, OnDestroy, AfterViewChecked {
 
   constructor(private http: HttpClient) {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.initializeSocket();
     this.loadInitialMessages();
   }

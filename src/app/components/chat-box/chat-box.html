@@ -22,7 +22,7 @@
           <!-- Images -->
           <div *ngIf="message.imagesFiles && message.imagesFiles.length > 0" class="images-grid">
             <div *ngFor="let image of message.imagesFiles" class="image-wrapper">
-              <img [src]="backendUrl + image" alt="Image" (click)="downloadFile(image)">
+              <img [src]="backendUrl + image" alt="Image" (click)="downloadFile(image)"> 
             </div>
           </div>
           
@@ -33,7 +33,7 @@
                  (click)="downloadFile(file)">
               <img src="images/chat_file.png" alt="File" class="file-icon">
               <span class="file-name">{{ getFileName(file) }}</span>
-              <button class="close-btn">×</button>
+              <!-- <button class="close-btn">×</button> -->
             </div>
           </div>
         </div>
