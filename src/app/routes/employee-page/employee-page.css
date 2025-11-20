@@ -1,0 +1,13 @@
+table{
+    width:100%;
+    font-size: 32px;
+    font-family: Garamond;
+    text-align: left;
+    table-layout: fixed;
+    margin-bottom: 30px;
+    background-color: gainsboro;
+}
+th{
+    padding-left: 20px;
+    border-left: 3px solid;
+}

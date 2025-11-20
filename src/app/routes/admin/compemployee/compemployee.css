@@ -1,0 +1,88 @@
+body{
+    background-color: #191B1F;
+    color: white;
+    padding-top: 30px;
+}
+#head{
+    margin-left: -10px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    border-bottom: 2px solid white;
+}
+input{
+    height: 30px;
+    width: 498px;
+    border-radius: 5px;
+    background-color: rgb(45, 45, 62);
+    color: white;
+    padding-left: 30px;
+    border:1px solid white ;
+}
+#searchicon{
+    position: relative;
+    top: 4px;
+    left: -528px;
+}
+button{
+    background-color: #6C63FF;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #16152f;
+}
+#sidebar{
+    width: 300px;
+    padding: 10px;
+    border-right: 2px solid white ;
+    align-self: stretch;
+}
+#member{
+    display: flex;
+    align-items: center;
+    gap :20px
+    
+}
+#member>img{
+    border-radius: 50%;
+}
+#buttons{
+    display: flex;
+    flex-direction: column;
+    gap: 10px   
+}
+#member:hover{
+    background-color: black;
+}
+#buttons>button{
+    width: 60px;
+    height: 35px;
+    background-color: red;
+}
+#buttons>#edit{
+    background-color: green;
+}
+#rest{
+    display: flex;
+    gap: 20px;
+}
+#informations{
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px; 
+    margin-bottom: 20px;
+}
+#informations>div{
+    width: 300px;
+    height: 180px;
+    padding: 10px ;
+    background-color: #2C2C2C;
+    border-radius: 10px;
+    border: 1px solid white;
+}
+#namepdp{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}

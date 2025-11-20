@@ -1,0 +1,92 @@
+body{
+    background-color: #191B1F;
+    color: white;
+    padding-top: 30px;
+}
+#head{
+    width: 82%;
+    margin-left: -10px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    border-bottom: 2px solid white;
+    position: absolute;
+    display: flex ;
+    align-items: center;
+    gap: 40px;
+}
+#head>button{
+    position: relative;
+    left: 800px;
+    background-color: #600E0E;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #191B1F ;
+}
+#head>select{
+    background-color: #191B1F;
+    color: white;
+    padding: 10px;
+    border: 1px solid #86DBFF;
+}
+#rest{
+    margin-top: 90px;
+}
+#sidebar{
+    width: 300px;
+    padding: 10px;
+    border-right: 2px solid white ;
+    align-self: stretch;
+}
+#notif>div{
+    display: flex;
+    justify-content: space-between;
+}
+#notif>h3,#notif>div>h3{
+    color: grey;
+    font-size: 12px;
+}
+#notif>h3,#notif>h5{
+    margin-top: -10px;
+}
+#buttons>button{
+    width: 100px;
+    height: 30px;
+    background-color: red;
+    border: 1px solid  #191B1F;
+}
+#buttons>#accept{
+    background-color: green;
+}
+#notif:hover{
+    background-color: black;
+}
+#rest{
+    display: flex;
+    gap: 20px;
+}
+#description>h4{
+    margin-top: -20px;
+    color: gray;
+}
+#begin{
+    display: flex;
+    gap:20px;
+    align-items: center;
+}
+#begin>button{
+    width: 100px;
+    height: 30px;
+    background-color: red;
+    border: 1px solid  #191B1F;
+}
+#begin>#accept{
+    background-color: green;
+}
+#detail{
+    padding: 10px ;
+    background-color: #2C2C2C;
+}
+#detail>h4{
+    margin-top: -5px;
+}
