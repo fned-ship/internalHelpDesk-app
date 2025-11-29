@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { io, Socket } from 'socket.io-client';
 import { environment } from '../../../environments/environment';
+import { UserService } from '../../services/user.service';
+import { TicketService } from '../../services/ticket.service';
 
 //e.g <app-chat-box [chatId]="'chat1'" [userId]="'emp10'"></app-chat-box>
 
@@ -54,11 +56,21 @@ export class ChatBox implements OnInit, OnDestroy, AfterViewChecked {
   private shouldScrollToBottom = true;
   private previousScrollHeight = 0;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private userService:UserService,private ticketService:TicketService) {}
 
   async ngOnInit() {
     this.initializeSocket();
     this.loadInitialMessages();
+
+    //test
+    // const res=await this.userService.acceptUser("17644512368350.07012060306315537");
+    // console.log(res);
+    // this.ticketService.getLastTicket("17633282237400.7755279409271736").subscribe({
+    //     next: (response) => console.log('data :', response.data),
+    //     error: (err) => console.error('Error:', err)
+    // });
+    // const res = await this.userService.updateUserProfile("17633282237400.7755279409271736",{password:"123456789",newPassword:'123456789'});
+    // console.log(res);
   }
 
   ngAfterViewChecked(): void {

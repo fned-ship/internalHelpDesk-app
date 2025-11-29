@@ -1,0 +1,47 @@
+<div class="chatbot-container">
+
+  <div class="messages" 
+       #scrollContainer 
+       (scroll)="onScroll($event)">
+
+    <div *ngFor="let msg of chat" [ngClass]="msg.role === 'bot' ? 'bot-msg' : 'user-msg'">
+      <p>{{ msg.text }}</p>
+
+      <div class="files-wrapper" *ngIf="msg?.imagesFile.length || msg?.otherFiles.length">
+
+        <a *ngFor="let file of msg?.otherFiles; let i=index"
+           [href]="file" download>
+          File {{ i+1 }}
+        </a>
+
+        <img *ngFor="let img of msg?.imagesFile" [src]="img" />
+      </div>
+    </div>
+
+    <div *ngIf="waiting" class="bot-msg">
+      <p>...</p>
+    </div>
+
+  </div>
+
+  <div class="previews" *ngIf="previews.length > 0">
+    <div class="preview" *ngFor="let p of previews; let i=index">
+      <img src="images/delete.png" class="delete" (click)="deletePreview(i)" />
+
+      <img *ngIf="p.type === 'image'" [src]="p.previewURL" />
+      <p *ngIf="p.type === 'other'">File {{ files[i].name }}</p>
+    </div>
+  </div>
+
+  <form class="input-area" (submit)="sendMessage()">
+    <input type="text" [(ngModel)]="message" name="message" placeholder="Type your message..." />
+
+    <label class="file-btn">
+      <img src="svg/files.svg" />
+      <input type="file" multiple (change)="onFileChange($event)" />
+    </label>
+
+    <button type="submit">Send</button>
+  </form>
+
+</div>

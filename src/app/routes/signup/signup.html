@@ -1,5 +1,25 @@
 <div class="full-screen-container">
   <div class="login-container">
+
+
+    <div class="left-panel">
+      <div class="logo-circle">AS</div>
+      <h2>Créer un compte</h2>
+      <p class="subtitle">Remplissez les informations ci-dessous.</p>
+
+      <div class="welcome-section">
+        <h3>Bienvenue</h3>
+        <p class="info-text">
+          Les champs marqués d'une * sont requis. Après l'inscription, 
+          un administrateur recevra une notification pour valider le compte.
+        </p>
+      </div>
+
+      <div class="footer">© 2025 AssistSphere</div>
+    </div>
+
+
+    <div class="right-panel">
     <h1
       [ngClass]="headerMsg === 'Welcome' ? 'login-title' : 'login-title success'"
       id="errorMsg"
@@ -132,7 +152,6 @@
           formControlName="password"
           required
         />
-        <span class="msg">{{ pswdErrMsg }}</span>
       </div>
 
       <!-- Profile Picture -->
@@ -150,7 +169,7 @@
           <span
             id="imageName"
             [style.color]="ImageNameColor"
-            style="word-break: break-word"
+            style="word-break: break-word;font-size: 1.4rem;"
             >{{ imageName }}</span
           >
         </label>
@@ -159,5 +178,6 @@
       <!-- Submit -->
       <button type="submit" class="sign-up-button">sign up</button>
     </form>
+    </div>
   </div>
 </div>

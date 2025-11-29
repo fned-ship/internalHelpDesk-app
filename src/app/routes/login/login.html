@@ -1,25 +1,44 @@
 <div class="full-screen-container">
   <div class="login-container">
-    <h1 [ngClass]="errorClass" id="errorMsg">{{ errorMsg }}</h1>
+    
+    <!-- LEFT PANEL -->
+    <div class="left-panel">
+      <div class="logo-circle">AS</div>
+      <h2>Se connecter</h2>
+      <p class="subtitle">Connectez-vous à votre compte.</p>
 
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
-      <div [ngClass]="emailClass" id="emailDiv">
-        <input type="email" id="email" placeholder="email..." formControlName="email" required />
-        <span class="msg" id="emailMsg">{{ emailMsg }}</span>
+      <div class="welcome-section">
+        <h3>Bienvenue</h3>
+        <p class="info-text">
+          Entrez vos identifiants pour accéder à votre espace personnel. 
+          Si vous n'avez pas encore de compte, vous pouvez en créer un.
+        </p>
       </div>
 
-      <div [ngClass]="passwordClass" id="passwordDiv">
-        <input type="password" id="password" placeholder="password..." formControlName="password" required />
-        <span class="msg" id="passwordMsg">{{ passwordMsg }}</span>
-      </div>
+      <div class="footer">© 2025 AssistSphere</div>
+    </div>
 
-      <button type="submit" class="login-button">Login</button>
-    </form>
+    <!-- RIGHT PANEL -->
+    <div class="right-panel">
+      <h1 [ngClass]="errorClass" id="errorMsg">{{ errorMsg }}</h1>
 
-    <a routerLink="/signup" id="createacc" style="display: block; width: 100%; margin-top: 20px;">create new account</a>
-    <a routerLink="/resetpassword" class="forgot-password"
-       style="margin-top: 15px; display: block; text-align: center; color: hsl(var(--primary-hsl)); text-decoration: none;">
-       forgot password ?
-    </a>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
+        <div [ngClass]="emailClass" id="emailDiv">
+          <input type="email" id="email" placeholder="email" formControlName="email" required />
+          <span class="msg" id="emailMsg">{{ emailMsg }}</span>
+        </div>
+
+        <div [ngClass]="passwordClass" id="passwordDiv">
+          <input type="password" id="password" placeholder="password" formControlName="password" required />
+          <span class="msg" id="passwordMsg">{{ passwordMsg }}</span>
+        </div>
+
+        <button type="submit" class="login-button">Login</button>
+      </form>
+
+      <a routerLink="/signup" id="createacc">create new account</a>
+      <a routerLink="/resetpassword" class="forgot-password">forgot password ?</a>
+    </div>
+    
   </div>
 </div>
