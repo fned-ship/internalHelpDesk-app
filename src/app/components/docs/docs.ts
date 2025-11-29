@@ -122,8 +122,7 @@ export class DocumentsComponent implements OnInit {
 
   canDelete(doc: Document): boolean {
 
-    const userRole = localStorage.getItem('userRole');
-    return userRole === 'admin' || doc.userId._id === this.currentUserId;
+    return this.role === 'admin' || doc.userId._id === this.currentUserId;
   }
 
   openUploadModal(): void {
