@@ -1,6 +1,5 @@
 import {  Routes } from '@angular/router';
 
-// Import components
 import { Signup } from './routes/signup/signup';
 import { Login} from './routes/login/login';
 import { ResetPassword } from './routes/reset-password/reset-password';
@@ -8,6 +7,7 @@ import { NewPassword } from './routes/new-password/new-password';
 import { Active } from './routes/active/active';
 import { EmployeePage } from './routes/employee-page/employee-page';
 import { Admin } from './routes/admin/admin';
+import { Chef } from './routes/chef/chef';
 
 export const routes: Routes = [
   { path: 'signup', component: Signup },
@@ -17,6 +17,8 @@ export const routes: Routes = [
   { path: 'active/:securitycode', component: Active },
   { path: 'employee', component: EmployeePage },
   {path:"admin",component:Admin},
+  {path:"manager",component:Chef},
+  {path:"chef",component:Chef},
   { path: '**', redirectTo: '/login' } // default/fallback route
 ];
 

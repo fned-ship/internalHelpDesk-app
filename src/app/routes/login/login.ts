@@ -67,11 +67,16 @@ export class Login {
             this.passwordClass = 'input-group';
 
             const user = res.user;
-            if (user.role=="admin") {
+            if (user.isActive && user.isAccepted ) {
               // Store cookies
               this.cookieService.set('user', JSON.stringify(user), { expires: 3 });
-              this.router.navigateByUrl('/admin');
-            } else {
+              this.router.navigateByUrl('/'+user.role);
+            } else if(user.isActive ){
+               this.errorClass = 'login-title err';
+              this.errorMsg = 'Your account is still waiting aproval from admin';
+            }
+            
+            else {
               this.errorClass = 'login-title err';
               this.errorMsg = 'Please activate your account first. A verification code was sent to your email.';
             }

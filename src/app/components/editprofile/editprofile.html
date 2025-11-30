@@ -1,4 +1,4 @@
-<main style="display: flex; flex-direction: column;">
+<main style="display: flex; flex-direction: column; background-color:#191B1F;">
 <h2>General Information</h2>
  <form [formGroup]="infoForm" (ngSubmit)="onSubmit()" class="form">
       <div class="input-group1">
@@ -114,6 +114,7 @@
         </div>
         <button class="save">Save</button>
       </div>
+      <h4 style="color: red">{{msg}}</h4>
  </form>
 
  <div id="delaccount" style="background-color:#161616; padding: 20px; margin-left: 20px; margin-top: 20px;">

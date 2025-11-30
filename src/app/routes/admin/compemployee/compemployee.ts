@@ -1,6 +1,7 @@
-import { Component , OnInit } from '@angular/core';
+import { Component , Input, OnInit } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { UserService } from '../../../services/user.service';
+import { TicketService } from '../../../services/ticket.service';
 import { User } from '../../../models/user.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule ,FormBuilder, FormGroup, Validators } from '@angular/forms'
@@ -12,25 +13,32 @@ import { FormsModule, ReactiveFormsModule ,FormBuilder, FormGroup, Validators } 
   styleUrl: './compemployee.css',
 })
 export class Compemployee implements OnInit {
-  constructor(private us: UserService, private fb:FormBuilder) { }
-  
+  constructor(private us: UserService, private fb:FormBuilder, private ts:TicketService) { }
+
+
+    @Input() type:string='';
+    @Input() role:string='';
     AllEmps :User[]=[];
     serverUrl=environment.serverURL;
     selected:any;
     searchterm:string="";
-    editing:boolean=false
+    editing:boolean=false;
+    recentactivity:any=null;
     infoForm!: FormGroup;
 
     imageName = '';
-    imageFile: File | null = null;
+    imageFile: File | undefined = undefined;
     ImageNameColor = 'green';
 
     
     async ngOnInit() {
-      const res = await this.us.getAllEmployees();
-      if (res.status==200){
-        console.log(res.data)
-        this.AllEmps=res.data ;
+      if(this.type=="employee"){
+      const res2=await this.us.getAllEmployees()
+       this.AllEmps=res2.data}
+      else{
+        {
+      const res2=await this.us.getAllManagers()
+    this.AllEmps=res2.data}
       }
       
     }
@@ -39,10 +47,21 @@ export class Compemployee implements OnInit {
       return new Date(s).toDateString()
     }
 
-    onSubmit(){
+    async onSubmit(){
       if(this.infoForm.valid){
         let data=this.infoForm.value
-        this.selected.lastName=data.lastName
+        const res= await this.us.updateUserProfile(this.selected.id,data,this.imageFile)
+        this.selected=res.data?.user
+        console.log("it worked")
+        if(this.type=="employee"){
+      const res2=await this.us.getAllEmployees()
+       this.AllEmps=res2.data}
+      else{
+        {
+      const res2=await this.us.getAllManagers()
+    this.AllEmps=res2.data}
+      }
+      
       }
   }
 
@@ -69,6 +88,9 @@ export class Compemployee implements OnInit {
 
     select(emp:any){
       this.selected=emp;
+      this.editing=false;
+      const res= this.ts.getLastTicket(this.selected.id)
+      console.log(res)
     }
 
     edit(){
@@ -83,5 +105,26 @@ export class Compemployee implements OnInit {
     });
     this.editing=true;
       }
+    }
+
+    async upgrade(){
+      const res=await this.us.upgradeToManager(this.selected.id)
+      const res2=await this.us.getAllEmployees()
+      this.AllEmps=res2.data
+      delete this.selected
+
+    }
+
+    async delete(){
+      const res=await this.us.deleteUser(this.selected.id)
+      if(this.type=="employee"){
+      const res2=await this.us.getAllEmployees()
+    this.AllEmps=res2.data}
+      else{
+        {
+      const res2=await this.us.getAllManagers()
+    this.AllEmps=res2.data}
+      }
+      
     }
 }

@@ -1,0 +1,60 @@
+body{
+    width:100vw;
+    height:100vh;
+}
+div{
+    background-color: #2C2C2C;
+    display: flex;
+    align-items: center;
+    color: white;
+    gap:10px;
+}
+
+#head{
+    border-bottom: 3px solid white;
+    gap: 20px;
+    width: 100vw;
+    position: relative;
+}
+#corner{
+    height: 13vh;
+    width: 16vw;
+    border-right: 3px solid white;
+}
+#corner>h1{
+    padding-left: 20px;
+}
+#rightside{
+    position: absolute;
+    right:40px;
+    gap:20px;
+}
+#ai{
+    background-color: white;
+    color: black;
+    height: 41px;
+    border-radius: 10px;
+
+}
+#sidebar{
+    width: 16vw;
+    flex-direction:column;
+    gap: 20px;
+    border-right: 3px solid white ;
+    align-self: stretch;
+    min-height: 87vh;
+}
+.btn{
+    width: 95%;
+    padding-left: 5%;
+    padding-top: 30px;
+    
+}
+.btn:hover{
+    background-color: rgb(94, 93, 93);
+}
+#rest{
+    background-color: #191B1F;
+    align-items:baseline;
+    gap:0px;
+}

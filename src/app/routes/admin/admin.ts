@@ -2,31 +2,32 @@ import { Component , OnInit } from '@angular/core';
 import { Compemployee } from './compemployee/compemployee';
 import { Compnotification } from './compnotification/compnotification';
 import { Editprofile } from '../../components/editprofile/editprofile';
+import { DocumentsComponent } from '../../components/docs/docs';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../cookies/auth.service';
+import { CookieService } from 'ngx-cookie-service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-admin',
-  imports: [CommonModule, Compemployee, Compnotification,Editprofile],
+  imports: [CommonModule, Compemployee, Compnotification,Editprofile,DocumentsComponent],
   templateUrl: './admin.html',
   styleUrl: './admin.css',
 })
 export class Admin {
    lastbtn:number=0;
-  /*constructor(private authService: AuthService,private us: UserService) { }
+   serverUrl=environment.serverURL;
+   curr:any
 
-  AllEmps :User[]=[];
+   constructor(private authService: AuthService,private cookieService:CookieService){}
   
-  async ngOnInit() {
-    const res = await this.us.getAllEmployees();
-    if (res.status==200){
-      console.log(res.data)
-      this.AllEmps=res.data ;
-    }
-  }*/
 
-
- // ngOnInit(): void {
-  //  this.authService.checkAndRedirect("admin");
- // }
+ ngOnInit(): void {
+   this.authService.checkAndRedirect("admin");
+   this.curr=JSON.parse(this.cookieService.get("user"))
+ }
+ handleuser(updateduser:any){
+  this.curr=updateduser
+  this.cookieService.set('user', JSON.stringify(this.curr), { expires: 3 });
+ }
 }

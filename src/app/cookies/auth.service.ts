@@ -17,7 +17,7 @@ export class AuthService {
 
   isRole(role:string):boolean{
     let user=JSON.parse(this.cookieService.get("user"))
-    return user.role == role ;
+    return user.role == role && user.isAccepted && user.isActive;
   }
   checkAndRedirect(role:string) {
     if (!this.isAuthenticated() || !this.isRole(role) ) {

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input,output} from '@angular/core';
 import { ReactiveFormsModule ,FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'editprofile',
@@ -9,22 +10,28 @@ import { ReactiveFormsModule ,FormBuilder, FormGroup, Validators } from '@angula
 })
 export class Editprofile implements OnInit {
 
+
+  @Input() user:any;
+
+  userevent=output<any>();
+
+  msg=""
   infoForm!: FormGroup;
   pwdForm!: FormGroup;
 
   imageName = '';
-  imageFile: File | null = null;
+  imageFile: File | undefined = undefined;
   ImageNameColor = 'green';
 
-  constructor( private fb: FormBuilder) {}
+  constructor( private fb: FormBuilder, private us:UserService) {}
   ngOnInit(): void {
     this.infoForm = this.fb.group({
-      firstName: ['Mohamed Adem', Validators.required],
-      lastName: ['Selmi', Validators.required],
-      birthDay: ['', Validators.required],
-      address: ['manar', Validators.required],
-      number: ['89585258', Validators.required],
-      job: ['Developper', Validators.required]
+      firstName: [this.user.firstName, Validators.required],
+      lastName: [this.user.lastName, Validators.required],
+      birthDay: [this.user.birthDay, Validators.required],
+      address: [this.user.address, Validators.required],
+      number: [this.user.number, Validators.required],
+      job: [this.user.job, Validators.required]
     });
     this.pwdForm = this.fb.group({
       oldpwd: ['', Validators.required],
@@ -32,11 +39,27 @@ export class Editprofile implements OnInit {
       verify: ['', Validators.required]
     });
   }
-  onSubmit(){
-    console.log("wtv")
+  async onSubmit(){
+    if(this.infoForm.valid){
+        let data=this.infoForm.value
+        const res= await this.us.updateUserProfile(this.user.id,data,this.imageFile)
+        console.log(res.data?.user)
+        this.userevent.emit(res.data?.user)
+      
+      }
+    
   }
-  onSubmit2(){
-    console.log("password")
+  async onSubmit2(){
+    if(this.pwdForm.valid){
+    let data=this.pwdForm.value
+    if(data.newpwd != data.verify){
+      this.msg="password doesn't match"
+    }else{
+      let data=this.infoForm.value
+        const res= await this.us.updateUserProfile(this.user.id,data,this.imageFile)
+        console.log(res)
+        this.msg=res.message||"something went wrong"
+    }}
   }
 
   handleFileChange(event: any) {

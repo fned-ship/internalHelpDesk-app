@@ -3,14 +3,13 @@
     
     <div id="corner"><h1>Admin Space</h1></div>
     <img src="images/me.jpeg" width="60px" height="60px">
-    <h2>Mohamed Adem Selmi</h2>
+    <h2>{{curr.firstName}} {{curr.lastName}}</h2>
     <div id="rightside">
     <div id="ai">
         <img src="images/AIIcon.png" width="20px" height="20px">
         <h5> Ai assistant &nbsp;</h5>
     </div>
     <img src="images/bellIcon.png" width="40px" height="40px" id="bellicon" (click)="lastbtn=6">
-    <img src="images/mailIcon.png" width="40px" height="40px" id="maimicon">
     </div>
 </div>
     <div id="rest">
@@ -19,7 +18,7 @@
             <img src="images/general.png" width="40px" height="40px" >
             <h3> Profile</h3>
         </div>
-        <div class="btn" (click)="lastbtn=1">
+        <div class="btn" (click)="lastbtn=2">
             <img src="images/DocumentIcon.png" width="40px" height="40px">
             <h3> Documents</h3>
         </div>
@@ -36,8 +35,10 @@
             <h3> Ticket </h3>
         </div>
         </div>
-    <compemployee *ngIf="lastbtn==3"></compemployee>
+    <compemployee [type]="'employee'" [role]="'admin'" *ngIf="lastbtn==3"></compemployee>
+    <compemployee [type]="'manager'" [role]="'admin'" *ngIf="lastbtn==4"></compemployee>
     <compnotification *ngIf="lastbtn==6"></compnotification>
-    <editprofile *ngIf="lastbtn==1"></editprofile>
+    <editprofile (userevent)="handleuser($event)" [user]="curr" *ngIf="lastbtn==1"></editprofile>
+    <documents [currentUserId]="curr._id" [role]="'admin'" *ngIf="lastbtn==2"></documents>
     </div>
 </body>

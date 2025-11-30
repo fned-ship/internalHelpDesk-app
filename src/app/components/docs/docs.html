@@ -1,0 +1,149 @@
+<div class="documents-container">
+  <div class="header">
+    <div class="search-box">
+      <input 
+        type="text" 
+        placeholder="Search..." 
+        (input)="onSearch($event)"
+        [(ngModel)]="searchTerm"
+      >
+    </div>
+    <button class="upload-btn" (click)="openUploadModal()">
+      UPLOAD
+    </button>
+  </div>
+
+  <div class="main-content">
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <h3>Documents</h3>
+        <select 
+          class="filter-select" 
+          [(ngModel)]="selectedFilter"
+          (change)="onFilterChange(selectedFilter)"
+        >
+          <option value="recents">Recents</option>
+          <option value="all">All Documents</option>
+        </select>
+      </div>
+
+      <div class="documents-list">
+        <div 
+          *ngFor="let doc of filteredDocuments" 
+          class="document-item"
+          [class.selected]="selectedDocument?._id === doc._id"
+          (click)="selectDocument(doc)"
+        >
+          <span class="material-icons doc-icon">{{ getFileIcon(doc.fileName) }}</span>
+          <div class="doc-info">
+            <div class="doc-name">{{ doc.fileName }}</div>
+            <div class="doc-meta">
+              {{ formatFileSize(doc.fileSize || 0) }} • {{ formatDate(doc.uploadDate || '') }}
+            </div>
+          </div>
+          <div class="doc-actions">
+            <button class="action-btn download-btn" (click)="downloadDocument(doc); $event.stopPropagation()">
+              DOWNLOAD
+            </button>
+            <button 
+              class="action-btn delete-btn" 
+              *ngIf="canDelete(doc)"
+              (click)="deleteDocument(doc); $event.stopPropagation()"
+            >
+              DELETE
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="preview-panel" *ngIf="selectedDocument">
+      <div class="preview-header">
+        <h2>{{ selectedDocument.fileName }}</h2>
+        <div class="preview-meta">
+          {{ selectedDocument.fileType?.toUpperCase() }} • 
+          {{ formatFileSize(selectedDocument.fileSize || 0) }} • 
+          Uploaded {{ formatDate(selectedDocument.uploadDate || '') }}
+        </div>
+      </div>
+
+      <div class="preview-actions">
+        <button class="action-btn-large download-btn" (click)="downloadDocument(selectedDocument)">
+          Download
+        </button>
+        <button 
+          class="action-btn-large delete-btn" 
+          *ngIf="canDelete(selectedDocument)"
+          (click)="deleteDocument(selectedDocument)"
+        >
+          Delete
+        </button>
+      </div>
+
+      <div class="preview-content">
+        <h3>Preview</h3>
+        <div class="preview-box">
+          <div class="comment-section">
+            <h4>Comment:</h4>
+            <p>{{ selectedDocument.comment }}</p>
+          </div>
+          <div class="uploader-info">
+            <strong>Uploaded by:</strong> {{ selectedDocument.userId?.firstName || 'Unknown' }} {{ selectedDocument.userId?.lastName }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="preview-panel empty" *ngIf="!selectedDocument">
+      <div class="empty-state">
+        <span class="material-icons">folder_open</span>
+        <p>Select a document to view details</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="showUploadModal" (click)="closeUploadModal()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Upload Document</h2>
+      <button class="close-btn" (click)="closeUploadModal()">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Select File</label>
+        <input 
+          type="file" 
+          (change)="onFileSelected($event)"
+          class="file-input"
+        >
+        <div class="file-name" *ngIf="uploadFile">
+          {{ uploadFile.name }}
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>Comment <span class="required">*</span></label>
+        <textarea 
+          [(ngModel)]="uploadComment"
+          placeholder="Add a comment about this document..."
+          rows="4"
+        ></textarea>
+      </div>
+
+      <div class="error-message" *ngIf="uploadError">
+        {{ uploadError }}
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-cancel" (click)="closeUploadModal()">
+        Cancel
+      </button>
+      <button class="btn btn-upload" (click)="uploadDocument()">
+        Upload
+      </button>
+    </div>
+  </div>
+</div>

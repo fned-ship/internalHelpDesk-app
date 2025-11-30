@@ -1,6 +1,28 @@
 <div class="full-screen-container">
   <div class="login-container">
-    <h1 class="login-title" id="errorMsg" [style.color]="color">{{ errorMsg }}</h1>
-    <a class="login-button" [style.display]="display" id="login" [routerLink]="['/login']">login</a>
+    
+    <!-- LEFT PANEL -->
+    <div class="left-panel">
+      <div class="logo-circle">AS</div>
+      <h2>AssistSphere</h2>
+      <p class="subtitle">Votre plateforme de gestion.</p>
+
+      <div class="welcome-section">
+        <h3>Information</h3>
+        <p class="info-text">
+          Vérifiez le message ci-contre pour connaître l'état de votre demande. 
+          Si tout est en ordre, vous pouvez procéder à la connexion.
+        </p>
+      </div>
+
+      <div class="footer">© 2025 AssistSphere</div>
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="right-panel">
+      <h1 class="login-title" id="errorMsg" [style.color]="color">{{ errorMsg }}</h1>
+      <a class="login-button" [style.display]="display" id="login" [routerLink]="['/login']">login</a>
+    </div>
+    
   </div>
 </div>

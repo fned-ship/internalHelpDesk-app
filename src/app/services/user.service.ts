@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { User } from '../models/user.model';
+import { UpdateProfileData } from './ticket.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  // GET all employees
+
   async getAllEmployees(): Promise<{ status: number; data: User[]; message?: string }> {
     try {
       const data = await firstValueFrom(this.http.get<User[]>(`${this.apiUrl}/getallemployees`));
@@ -22,7 +23,7 @@ export class UserService {
     }
   }
 
-  // GET all managers
+
   async getAllManagers(): Promise<{ status: number; data: User[]; message?: string }> {
     try {
       const data = await firstValueFrom(this.http.get<User[]>(`${this.apiUrl}/getallmanagers`));
@@ -32,7 +33,7 @@ export class UserService {
     }
   }
 
-  // POST upgrade user to manager
+
   async upgradeToManager(id: string): Promise<{ status: number; data?: User; message?: string }> {
     try {
       const data = await firstValueFrom(this.http.post<{ message: string; user: User }>(`${this.apiUrl}/upgrade/${id}/manager`, {}));
@@ -42,7 +43,7 @@ export class UserService {
     }
   }
 
-  // GET pending users
+
   async getPendingUsers(): Promise<{ status: number; data: User[]; message?: string }> {
     try {
       const data = await firstValueFrom(this.http.get<User[]>(`${this.apiUrl}/pendingusers`));
@@ -52,7 +53,7 @@ export class UserService {
     }
   }
 
-  // POST accept user
+
   async acceptUser(id: string): Promise<{ status: number; data?: User; message?: string }> {
     try {
       const data = await firstValueFrom(this.http.post<{ message: string; user: User }>(`${this.apiUrl}/acceptuser/${id}`, {}));
@@ -62,7 +63,7 @@ export class UserService {
     }
   }
 
-  // DELETE user
+
   async deleteUser(id: string): Promise<{ status: number; message: string }> {
     try {
       const data = await firstValueFrom(this.http.delete<{ message: string }>(`${this.apiUrl}/${id}`));
@@ -71,4 +72,35 @@ export class UserService {
       return { status: error.status || 500, message: error.error?.message || 'Failed to delete user' };
     }
   }
+
+
+  
+  // new func
+  async updateUserProfile(
+    userId: string, 
+    profileData: UpdateProfileData, 
+    imageFile?: File
+    ): Promise<{ status: number; data?: { message: string; user: User }; message?: string }> {
+      try {
+        const formData = new FormData();
+        formData.append('data', JSON.stringify(profileData));
+        
+        if (imageFile) {
+          formData.append('image', imageFile);
+        }
+
+        const data = await firstValueFrom(
+          this.http.put<{ message: string; user: User }>(
+            `${this.apiUrl}/user/profile/${userId}`, 
+            formData
+          )
+        );
+        return { status: 200, data };
+      } catch (error: any) {
+        return { 
+          status: error.status || 500, 
+          message: error.error?.message || error.message || 'Failed to update profile' 
+        };
+      }
+    }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {EmpHeader} from './emp-header/emp-header';
 import { Ticket } from './ticket/ticket';
+import { AuthService } from '../../cookies/auth.service';
 
 @Component({
   selector: 'app-employee-page',
@@ -9,5 +10,10 @@ import { Ticket } from './ticket/ticket';
   styleUrl: './employee-page.css'
 })
 export class EmployeePage {
-
+  constructor(private authService: AuthService){}
+    
+  
+   ngOnInit(): void {
+     this.authService.checkAndRedirect("employee");
+   }
 }
