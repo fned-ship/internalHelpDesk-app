@@ -65,7 +65,11 @@ export class ChatBox implements OnInit, OnDestroy, AfterViewChecked {
     //test
     // const res=await this.userService.acceptUser("17644512368350.07012060306315537");
     // console.log(res);
-    // this.ticketService.getLastTicket("17633282237400.7755279409271736").subscribe({
+    // this.ticketService.getLastTicket("691cb3518be8df6fae1199a4").subscribe({
+    //     next: (response) => console.log('data :', response.data),
+    //     error: (err) => console.error('Error:', err)  
+    // });
+    // this.ticketService.createTicket({emp:"691cb3518be8df6fae1199a4",chef:"692afee0fd44fa94a1bbf58d",emp_id:"17634885939710.8416665112738031",chef_id:"17644254400790.12280462051869123",status:"In Progress",priority:"Low",deadline:new Date("2026-1-1"),description:"gg"}).subscribe({
     //     next: (response) => console.log('data :', response.data),
     //     error: (err) => console.error('Error:', err)
     // });
