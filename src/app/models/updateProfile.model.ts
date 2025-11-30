@@ -6,4 +6,5 @@ export interface UpdateProfileData {
   job?: string;
   password?: string;
   newPassword?: string;
+  address?:string ;
 }

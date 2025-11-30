@@ -29,11 +29,13 @@ export class TicketService {
   }
 
 
+  //must provide id and _id for both of manager and employee
   createTicket(ticket: Omit<Ticket, 'rating'>): Observable<ApiResponse<Ticket>> {
     return this.http.post<ApiResponse<Ticket>>(`${this.apiUrl}/createticket`, ticket);
   }
 
 
+  // ticket id ( not _id )
   updateTicketStatus(ticketId: string, status: 'In Progress' | 'Closed' | 'Pending'): Observable<ApiResponse<Ticket>> {
     return this.http.patch<ApiResponse<Ticket>>(
       `${this.apiUrl}/updateticketstatus/${ticketId}`,
@@ -42,6 +44,7 @@ export class TicketService {
   }
 
 
+  // ticket id ( not _id )
   rateTicket(ticketId: string, rating: number, closeTicket: boolean = false): Observable<ApiResponse<Ticket>> {
     return this.http.patch<ApiResponse<Ticket>>(
       `${this.apiUrl}/rateticket/${ticketId}`,
@@ -50,6 +53,7 @@ export class TicketService {
   }
 
 
+  // ticket id ( not _id )
   updateTicketDescription(ticketId: string, description: string): Observable<ApiResponse<Ticket>> {
     return this.http.put<ApiResponse<Ticket>>(
       `${this.apiUrl}/updateticket/${ticketId}`,
@@ -57,6 +61,7 @@ export class TicketService {
     );
   }
 
+  // ticket id ( not _id )
   deleteTicket(ticketId: string): Observable<ApiResponse<any>> {
     return this.http.delete<ApiResponse<any>>(`${this.apiUrl}/deleteticket/${ticketId}`);
   }
@@ -68,14 +73,19 @@ export class TicketService {
 
 
   // new functions : 
+
+  // userId : _id and not id
   getLastTicket(userId: string): Observable<ApiResponse<Ticket>> {
     return this.http.get<ApiResponse<Ticket>>(`${this.apiUrl}/ticket/last/${userId}`);
   }
 
+
+  // ticket id ( not _id )
   getTicketById(ticketId: string): Observable<ApiResponse<Ticket>> {
     return this.http.get<ApiResponse<Ticket>>(`${this.apiUrl}/ticket/${ticketId}`);
   }
 
+  // userId : _id and not id
   getTicketsByUserId(userId: string): Observable<ApiResponse<Ticket[]>> {
     return this.http.get<ApiResponse<Ticket[]>>(`${this.apiUrl}/tickets/user/${userId}`);
   }
