@@ -1,0 +1,126 @@
+<main style="display: flex; flex-direction: column;">
+<h2>General Information</h2>
+ <form [formGroup]="infoForm" (ngSubmit)="onSubmit()" class="form">
+      <div class="input-group1">
+        <div>
+        <h3>First name:</h3>
+        <input
+          type="text"
+          id="firstName"
+          formControlName="firstName"
+          required
+        /></div>
+        <div>
+        <h3>First name:</h3>
+        <input
+          type="text"
+          id="lastName"
+          placeholder="last name"
+          formControlName="lastName"
+          required
+        />
+        </div>
+      </div>
+      <div class="input-group" >
+        <h3>Birthday:</h3>
+        <input
+          type="date"
+          id="birth"
+          formControlName="birthDay"
+          required
+        />
+      </div>
+      <div class="input-group" >
+        <h3>Adresse:</h3>
+        <input
+          type="text"
+          id="address"
+          placeholder="address"
+          formControlName="address"
+          required
+        />
+      </div>
+      <div class="input-group" >
+        <h3>Phone Number: </h3>
+        <input
+          type="tel"
+          id="number"
+          placeholder="Enter phone number"
+          formControlName="number"
+          required
+        />
+      </div>
+      <div class="input-group" >
+        <h3>Job: </h3>
+        <input
+          type="text"
+          id="job"
+          placeholder="your job..."
+          formControlName="job"
+          required
+        />
+      </div>
+      <label for="inputTag">
+         <h3> Change profile picture</h3>  <br />
+          <img src="svg/camera.svg" alt="camera" />
+          <input
+          style="border: none; background-color: #191B1F;"
+            id="inputTag"
+            accept="image/*"
+            type="file"
+            (change)="handleFileChange($event)"
+          />
+          <br />
+          <span
+            id="imageName"
+            [style.color]="ImageNameColor"
+            style="word-break: break-word"
+            >{{ imageName }}</span
+          >
+        </label>
+      <div id="btn">
+      <button type="submit" class="savechanges">Save Changes</button>
+      <button type="button" class="discard">Discard</button>
+      </div>
+    </form>
+<h2 style="padding-top: 20px;">Change Password</h2>
+ <form [formGroup]="pwdForm" (ngSubmit)="onSubmit2()" class="form2">
+      <div class="input-group1">
+        <div>
+        <h3>Old Password:</h3>
+        <input
+          type="password"
+          class="pwd"
+          formControlName="oldpwd"
+          required
+        /></div>
+        <div>
+        <h3>New Password:</h3>
+        <input
+          type="password"
+          class="pwd"
+          formControlName="newpwd"
+          required
+        />
+        </div>
+         <div>
+        <h3>Verify Password:</h3>
+        <input
+          type="password"
+          class="pwd"
+          formControlName="verify"
+          required
+        />
+        </div>
+        <button class="save">Save</button>
+      </div>
+ </form>
+
+ <div id="delaccount" style="background-color:#161616; padding: 20px; margin-left: 20px; margin-top: 20px;">
+    <div>
+    <h4>Delete your account</h4>
+    <h4 style="color: rgb(178, 124, 124);">Warning: This action is irreversible!</h4></div>
+    <button class="del">Delete Account</button>
+ </div>
+
+ </main>

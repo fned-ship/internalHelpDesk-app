@@ -33,11 +33,13 @@ export class Active implements OnInit {
         .subscribe({
           next: (res) => {
             console.log('Response:', res);
-            if (res === 'verified') {
+            if (res == '"verified"' ) {
+              console.log('Response1:', res);
               this.errorMsg = 'Your account has been successfully verified';
               this.color = 'hsl(var(--success-hsl))';
               this.display = 'block';
             } else {
+              console.log('Response2:', res);
               this.errorMsg = 'This code is no longer usable';
               this.color = 'hsl(var(--error-hsl))';
               this.display = 'none';

@@ -8,6 +8,8 @@ table{
     background-color: gainsboro;
 }
 th{
+    margin-bottom: 30px;
+    font-family: Garamond;
     padding-left: 20px;
     border-left: 3px solid;
 }

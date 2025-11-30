@@ -2,26 +2,28 @@ body{
     background-color: #191B1F;
     color: white;
     padding-top: 30px;
+    width: calc(84vw - 23px);
+    
 }
 #head{
-    width: 82%;
-    margin-left: -10px;
+    width: calc(84vw - 23px);
     padding-bottom: 20px;
     padding-left: 20px;
     border-bottom: 2px solid white;
-    position: absolute;
+    position: relative;
     display: flex ;
     align-items: center;
     gap: 40px;
 }
 #head>button{
-    position: relative;
-    left: 800px;
+    position: absolute;
+    right: 40px;
     background-color: #600E0E;
     color: white;
     padding: 10px;
     border-radius: 10px;
     border: 1px solid #191B1F ;
+    
 }
 #head>select{
     background-color: #191B1F;
@@ -29,16 +31,14 @@ body{
     padding: 10px;
     border: 1px solid #86DBFF;
 }
-#rest{
-    margin-top: 90px;
-}
 #sidebar{
     width: 300px;
     padding: 10px;
     border-right: 2px solid white ;
-    align-self: stretch;
+    min-height: 600px;
 }
 #notif>div{
+    margin-top: 20px;
     display: flex;
     justify-content: space-between;
 }
@@ -52,8 +52,9 @@ body{
 #buttons>button{
     width: 100px;
     height: 30px;
-    background-color: red;
+    background-color: #600E0E;
     border: 1px solid  #191B1F;
+    color: white;
 }
 #buttons>#accept{
     background-color: green;
@@ -77,11 +78,12 @@ body{
 #begin>button{
     width: 100px;
     height: 30px;
-    background-color: red;
+    background-color: #600E0E;
+    color: white;
     border: 1px solid  #191B1F;
 }
 #begin>#accept{
-    background-color: green;
+    background-color: #15600E;
 }
 #detail{
     padding: 10px ;

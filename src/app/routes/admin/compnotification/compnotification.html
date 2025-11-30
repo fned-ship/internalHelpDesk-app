@@ -1,43 +1,42 @@
 <body>
     <div id="head">
     <h2>Notifications</h2>
-    <select name="notiftype">
-        <option value="all">All</option>
-        <option value="most recent">Most recent</option>
-        <option value="oldest">Oldest</option>
+    <select name="notiftype" [(ngModel)]="sortkey">
+        <option value="1">Oldest</option>
+        <option value="2">Most recent</option>
     </select>
-    <button>Mark All As Read</button>
+    <button>Reject All</button>
     </div>
     <div id="rest">
         <div id="sidebar">
-            <h4>Liste &nbsp; (4 notifs)</h4>
-            <div id="notif">
+            <h4>Liste &nbsp; ({{notifs.length}} notifications)</h4>
+            <div *ngFor="let user of sort(); index as i" id="notif" (click)="selected=i">
                 <div>
                 <h5> Nouveau utilisateur en attente &nbsp;</h5>
-                <h3> 7/972025</h3>
+                <h3> {{user.createdAt}}</h3>
                 </div>
                 <h5>Tantative de sign up a partie de l'email </h5>
-                <h3>(mohamedAdem564@gmail.com)</h3>
+                <h3>({{user.email}})</h3>
                 <div id="buttons">
-                    <button id="accept">Accept</button>
-                    <button>Rejecect</button>
+                    <button id="accept" (click)="accept(i)">Accept</button>
+                    <button (click)="reject(i)">Reject</button>
                 </div>
             </div>
         </div>
-        <div id="description" >
+        <div *ngIf="selected > -1" id="description" >
             <div id="begin">
             <h2>Nouveau Utilisateur en attente </h2>
-            <button id="accept">Accept</button>
-            <button>Rejecect</button>
+            <button id="accept" (click)="accept(selected)">Accept</button>
+            <button (click)="reject(selected)">Reject</button>
             </div>
-            <h4>8/9/2026 &nbsp; Type:SignUp</h4>
+            <h4>{{notifs[selected].createdAt}} &nbsp; Type:SignUp</h4>
             <div id="detail">
                 <h3>Détails:</h3>
-                <h4>Name: </h4>
-                <h4>Title: </h4>
-                <h4>Email Adresse: </h4>
-                <h4>Departement: </h4>
-                <h4>etc... </h4>
+                <h4>Name: {{notifs[selected].firstName}} {{notifs[selected].LastName}}</h4>
+                <h4>Title: {{notifs[selected].job}}</h4>
+                <h4>Email Adresse: {{notifs[selected].email}} </h4>
+                <h4>Number: {{notifs[selected].number}} </h4>
+                <h4>CIN: {{notifs[selected].cin}} </h4>
             </div>
         </div>
     </div>

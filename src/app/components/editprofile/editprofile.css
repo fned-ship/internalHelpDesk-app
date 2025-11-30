@@ -1,0 +1,71 @@
+h2{
+    margin-left: 20px;
+}
+h3{
+    color:#A7A7A7;
+}
+
+.input-group,#btn,.input-group1,#delaccount{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom : 20px ;
+}
+.input-group1,#delaccount{
+    justify-content: space-between;
+}
+.form,.form2{
+    width: 70vw;
+    margin-left: 30px ;
+}
+input{
+    width: 30vw ;
+    height: 40px;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    padding-left: 30px;
+    border:1px solid #434D7E ;
+    font-size: large;
+}
+button:focus{
+    outline: none;
+    box-shadow: none;
+}
+.savechanges,.discard{
+    margin-top: 20px;
+    color: white;
+    background-color: rgb(71, 6, 6);
+    height: 40px;
+    width: 100px;
+    border-radius: 10px;
+    border: rgb(71, 6, 6);
+}
+.savechanges{
+    background-color: #1C718F;
+    border: #1C718F ;
+}
+.pwd{
+    width: 15vw;
+}
+.save{
+    color: white;
+    height: 40px;
+    width: 100px;
+    border-radius: 10px;
+    background-color: #1C718F;
+    border: #1C718F;
+}
+.del{
+    margin-top: 20px;
+    color: white;
+    background-color: red;
+    height: 40px;
+    width: 150px;
+    border-radius: 10px;
+    border: red;
+
+}
+input.ng-invalid.ng-touched,input.ng-invalid.ng-dirty{
+    border-color: red;
+}

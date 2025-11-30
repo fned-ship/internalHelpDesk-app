@@ -1,52 +1,44 @@
 <body>
     <div id="head">
-    <input type="text" placeholder="Search for employee by name...">
+    <input [(ngModel)]="searchterm" type="text" placeholder="Search for employee by name...">
     <img src="images/SearchIcon.png" width="20px" height="20px" id="searchicon">
-    <button>Upgrade Employee to Chef</button>
     </div>
     <div id="rest">
         <div id="sidebar">
-            <h4>Employees &nbsp; (4 membres)</h4>
-            <div id="member">
-                <img src="images/me.jpeg" width="60px" height="60px">
+            <h4>Employees &nbsp; ({{AllEmps.length}} membres)</h4>
+            <div *ngFor="let emp of filter()" id="member" (click)="selected=emp;editing=false">
+                <img [src]="serverUrl+'/imagesProfile/'+emp.imageSrc" width="60px" height="60px">
                 <div>
-                <h5> Mohamed Adem Selmi &nbsp;</h5>
-                <h5> Junior Engineer &nbsp;</h5>
-                </div>
-                <div id="buttons">
-                    <button id="edit">Edit</button>
-                    <button>Delete</button>
+                <h5> {{emp.firstName}} &nbsp; {{emp.lastName}}</h5>
+                <h5> {{emp.job}} &nbsp;</h5>
                 </div>
             </div>
-            <div id="member">
-                <img src="images/me.jpeg" width="60px" height="60px">
-                <div>
-                <h5> Mohamed Adem Selmi &nbsp;</h5>
-                <h5> Junior Engineer &nbsp;</h5>
-                </div>
-                <div id="buttons">
-                    <button id="edit">Edit</button>
-                    <button>Delete</button>
-                </div>
-            </div>
+            
         </div>
-         <div id="description">
+         <div *ngIf="selected && !editing" id="description">
             <div id="namepdp">
-            <img src="images/me.jpeg" width="70px" height="70px">
-            <h2>Mohamed Adem Selmi</h2>
+            <img [src]="serverUrl+'/imagesProfile/'+selected.imageSrc" width="70px" height="70px">
+            <h2>{{selected.firstName}} {{selected.lastName}}</h2>
+            </div>
+            <h4>Joined on: {{date(selected.createdAt) }} </h4>
+            <div id="buttons">
+                    <button id="edit" (click)="edit()">Edit</button>
+                    <button id="delete">Delete</button>
+                    <button id="upgrade">Upgrade Employee to Chef</button>
+
             </div>
             <div id="informations">
             <div>
                 <h4>Informations Generales:</h4>
-                <h5>Titre: Software Engineer</h5>
+                <h5>Titre: {{selected.job}}</h5>
                 <h5>Departement: Informatique</h5>
-                <h5>Rating: 4.5 &starf; (based on 10 reviews) </h5>
+                <h5>Rating: {{selected.rating}} &starf; (based on {{selected.numberOfTickets}}reviews) </h5>
             </div>
             <div>
                 <h4>Contact:</h4>
-                <h5>Email Adresse:</h5>
-                <h5>Phone number:</h5>
-                <h5>Home adresse: </h5>
+                <h5>Email Adresse: {{selected.email}}</h5>
+                <h5>Phone number: {{selected.number}}</h5>
+                <h5>Home adresse: {{selected.address}} </h5>
             </div>
             <div>
                 <h4>Recent Activity:</h4>
@@ -56,6 +48,90 @@
             </div>
             </div>
         </div>
+    <form *ngIf="editing"  [formGroup]="infoForm" (ngSubmit)="onSubmit()" class="form">
+      <div class="input-group1">
+        <div>
+        <h3>First name:</h3>
+        <input
+          type="text"
+          class="forminput"
+          formControlName="firstName"
+          placeholder="First name"
+          required
+        /></div>
+        <div>
+        <h3>Last name:</h3>
+        <input
+          type="text"
+          id="lastName"
+          placeholder="last name"
+          formControlName="lastName"
+          required
+        />
+        </div>
+      </div>
+      <div class="input-group" >
+        <h3>Birthday:</h3>
+        <input
+          type="date"
+          id="birth"
+          formControlName="birthDay"
+          required
+        />
+      </div>
+      <div class="input-group" >
+        <h3>Adresse:</h3>
+        <input
+          type="text"
+          id="address"
+          placeholder="address"
+          formControlName="address"
+          required
+        />
+      </div>
+      <div class="input-group" >
+        <h3>Phone Number: </h3>
+        <input
+          type="tel"
+          id="number"
+          placeholder="Enter phone number"
+          formControlName="number"
+          required
+        />
+      </div>
+      <div class="input-group" >
+        <h3>Job: </h3>
+        <input
+          type="text"
+          id="job"
+          placeholder="your job..."
+          formControlName="job"
+          required
+        />
+      </div>
+      <label for="inputTag">
+         <h3> Change profile picture</h3>  <br />
+          <img src="svg/camera.svg" alt="camera" />
+          <input
+          style="border: none; background-color: #191B1F;"
+            id="inputTag"
+            accept="image/*"
+            type="file"
+            (change)="handleFileChange($event)"
+          />
+          <br />
+          <span
+            id="imageName"
+            [style.color]="ImageNameColor"
+            style="word-break: break-word"
+            >{{ imageName }}</span
+          >
+        </label>
+      <div id="btn" style="display:flex; gap:20px; margin-bottom: 20px;">
+      <button type="submit" class="savechanges">Save Changes</button>
+      <button type="button" class="discard" (click)="editing=false">Discard</button>
+      </div>
+    </form>
     </div>
 </body>
 
