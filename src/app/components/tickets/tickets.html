@@ -1,0 +1,25 @@
+<div id="total">
+    <div id="gauche">
+        <div class="id">
+          <p id="titre">{{ticket()?.name}}</p>
+          <p>{{ticket()?.status}}</p>
+        </div>
+
+        <div >
+          <p>{{ticket()?.fromWho}} -> {{ticket()?.toWho}}</p>
+        </div>
+        <div class="id">
+            <p>{{ticket()?.expireDate}}</p>
+            <p>{{ticket()?.priority}}</p>
+
+        </div>
+
+
+    </div>
+    
+    <div id="droite">
+        <button (click)="edit()" id="edit">Edit</button>
+        <button (click)="delete()" id="delete">Delete</button>
+
+    </div>
+</div>

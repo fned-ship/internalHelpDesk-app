@@ -1,0 +1,35 @@
+<div id="total">
+    <div class="id">
+        <h2>Name : {{ticket()?.name}}</h2>
+        <p>Status : {{ticket()?.status}}</p>
+      
+
+
+
+    </div>
+    <div class="id">
+        <p>Created by {{ticket()?.fromWho}} * Assigned to {{ticket()?.toWho}}</p>
+        <p>Expiration data : {{ticket()?.expireDate}}</p>
+
+
+    </div>
+
+    <div class="id">
+        <h5>Details</h5>
+        <p>Priorite : {{ticket()?.priority}}</p>
+        <p>Status : {{ticket()?.status}}</p> 
+
+    </div>
+     <div class="id">
+        <h5>Description : {{ticket()?.description}}</h5>
+        <div id="le5er">
+            <input  type="text" [formControl]="description" [placeholder]="ticket()?.description">
+            <button (click)="Valider()" id="button">Valider</button>
+
+
+        </div>
+       
+
+    </div>
+
+</div>

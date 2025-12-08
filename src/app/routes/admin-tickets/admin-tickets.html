@@ -1,0 +1,27 @@
+<div id="total">
+  <div id="gauche">
+    <div id="id1">
+        <h2>Tickets</h2>
+        <p>{{tickets.length}}</p>
+
+    </div>
+    <div id="id2">
+        @for(tick of tickets;track tick.name){
+                <app-ticket (emitteurDelete)="ondelete($event)" [ticket]="tick" (emitteur)="onEdit(tick)"></app-ticket>
+                <hr>
+
+        }
+
+    </div>
+  </div>
+    
+  <div id="droite">
+        @if(editClicked){
+          <app-affichage-details (emetteur)="editDescription($event)"   [ticket]="selectedTicket"></app-affichage-details>
+        }
+
+  </div>
+
+
+</div>
+
