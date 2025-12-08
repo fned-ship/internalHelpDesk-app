@@ -70,6 +70,7 @@ export class Login {
             if (user.isActive && user.isAccepted ) {
               // Store cookies
               this.cookieService.set('user', JSON.stringify(user), { expires: 3 });
+              
               this.router.navigateByUrl('/'+user.role);
             } else if(user.isActive ){
                this.errorClass = 'login-title err';

@@ -1,12 +1,12 @@
 <main>
     <div id="head">
     
-    <div id="corner"><h1>Admin Space</h1></div>
+    <div id="corner"><h1>Employee Space</h1></div>
     <img [src]="serverUrl+'/imagesProfile/'+curr.imageSrc" width="60px" height="60px" style="border-radius: 50%;">
     <h2>{{curr.firstName}} {{curr.lastName}}</h2>
     <div id="rightside">
     <div id="ai" (click)="lastbtn=7">
-        <img src="images/AIIcon.png" width="20px" height="20px">
+        <img src="images/AIIcon.png" width="20px" height="20px" >
         <h5> Ai assistant &nbsp;</h5>
     </div>
     <img src="images/bellIcon.png" width="40px" height="40px" id="bellicon" (click)="lastbtn=6">
@@ -24,22 +24,16 @@
         </div>
         <div class="btn" (click)="lastbtn=3">
             <img src="images/EmployeeIcon.png" width="40px" height="40px" >
-            <h3> Employee </h3>
+            <h3> Manager </h3>
         </div>
         <div class="btn" (click)="lastbtn=4">
-            <img src="images/clientIcon.png" width="40px" height="40px" >
-            <h3> Chef </h3>
-        </div>
-        <div class="btn" (click)="lastbtn=5">
             <img src="images/ticketIcon.png" width="40px" height="40px">
             <h3> Ticket </h3>
         </div>
         </div>
-    <compemployee [type]="'employee'" [role]="'admin'" *ngIf="lastbtn==3"></compemployee>
-    <compemployee [type]="'manager'" [role]="'admin'" *ngIf="lastbtn==4"></compemployee>
-    <compnotification *ngIf="lastbtn==6"></compnotification>
-    <editprofile (userevent)="handleuser($event)" [user]="curr" *ngIf="lastbtn==1"></editprofile>
-    <documents [currentUserId]="curr._id" [role]="'admin'" *ngIf="lastbtn==2"></documents>
+    <compemployee [type]="'manager'" [role]="''" *ngIf="lastbtn==3"></compemployee>
+    <editprofile [user]="curr" (userevent)="handleuser($event)" *ngIf="lastbtn==1"></editprofile>
+    <documents [currentUserId]="curr._id" [role]="'manager'" *ngIf="lastbtn==2"></documents>
     <app-chatbot *ngIf="lastbtn==7" [userID]="curr._id"></app-chatbot>
     </div>
 </main>

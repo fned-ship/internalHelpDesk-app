@@ -45,6 +45,7 @@ export class Editprofile implements OnInit {
         const res= await this.us.updateUserProfile(this.user.id,data,this.imageFile)
         console.log(res.data?.user)
         this.userevent.emit(res.data?.user)
+        alert("Information updated successfully!")
       
       }
     
@@ -55,11 +56,25 @@ export class Editprofile implements OnInit {
     if(data.newpwd != data.verify){
       this.msg="password doesn't match"
     }else{
-      let data=this.infoForm.value
-        const res= await this.us.updateUserProfile(this.user.id,data,this.imageFile)
-        console.log(res)
-        this.msg=res.message||"something went wrong"
+      let data=this.pwdForm.value
+      console.log({password:data.oldpwd,newPassword:data.newpwd})
+        const res= await this.us.updateUserProfile(this.user.id,{password:data.oldpwd,newPassword:data.newpwd})
+        if(res.status=200){
+          this.msg="password changed successfully"
+        }else{
+          this.msg="something went wrong"
+        }
     }}
+  }
+  discard(){
+    this.infoForm = this.fb.group({
+      firstName: [this.user.firstName, Validators.required],
+      lastName: [this.user.lastName, Validators.required],
+      birthDay: [this.user.birthDay, Validators.required],
+      address: [this.user.address, Validators.required],
+      number: [this.user.number, Validators.required],
+      job: [this.user.job, Validators.required]
+    });
   }
 
   handleFileChange(event: any) {

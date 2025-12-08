@@ -5,9 +5,9 @@ import { Login} from './routes/login/login';
 import { ResetPassword } from './routes/reset-password/reset-password';
 import { NewPassword } from './routes/new-password/new-password';
 import { Active } from './routes/active/active';
-import { EmployeePage } from './routes/employee-page/employee-page';
 import { Admin } from './routes/admin/admin';
 import { Chef } from './routes/chef/chef';
+import { Employee } from './routes/employee/employee';
 
 export const routes: Routes = [
   { path: 'signup', component: Signup },
@@ -15,10 +15,10 @@ export const routes: Routes = [
   { path: 'resetpassword', component: ResetPassword },
   { path: 'newpassword', component: NewPassword },
   { path: 'active/:securitycode', component: Active },
-  { path: 'employee', component: EmployeePage },
   {path:"admin",component:Admin},
   {path:"manager",component:Chef},
   {path:"chef",component:Chef},
+  {path:"employee",component:Employee},
   { path: '**', redirectTo: '/login' } // default/fallback route
 ];
 

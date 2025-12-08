@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EmpHeader } from './emp-header';
+import { Compcreateticket } from './compcreateticket';
 
-describe('EmpHeader', () => {
-  let component: EmpHeader;
-  let fixture: ComponentFixture<EmpHeader>;
+describe('Compcreateticket', () => {
+  let component: Compcreateticket;
+  let fixture: ComponentFixture<Compcreateticket>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EmpHeader]
+      imports: [Compcreateticket]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(EmpHeader);
+    fixture = TestBed.createComponent(Compcreateticket);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

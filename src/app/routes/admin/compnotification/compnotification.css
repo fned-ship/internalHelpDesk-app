@@ -1,4 +1,4 @@
-body{
+main{
     background-color: #191B1F;
     color: white;
     padding-top: 30px;
@@ -87,7 +87,7 @@ body{
 }
 #detail{
     padding: 10px ;
-    background-color: #2C2C2C;
+    background-color: #0D0D0D;
 }
 #detail>h4{
     margin-top: -5px;

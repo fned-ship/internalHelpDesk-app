@@ -1,4 +1,4 @@
-body{
+main{
     width:100vw;
     height:100vh;
 }
@@ -11,6 +11,7 @@ div{
 }
 
 #head{
+    font-family: "Cormorant Garamond";
     border-bottom: 3px solid white;
     gap: 20px;
     width: 100vw;
@@ -32,8 +33,9 @@ div{
 #ai{
     background-color: white;
     color: black;
-    height: 41px;
-    border-radius: 10px;
+    height: 40px;
+    font-family: "Inter";
+    border-radius: 20px;
 
 }
 #sidebar{

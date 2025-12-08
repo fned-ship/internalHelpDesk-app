@@ -1,0 +1,55 @@
+<h2>New Ticket</h2>
+<form   [formGroup]="ticketForm" (ngSubmit)="onSubmit()" class="form">
+    <div class="input-group" >
+        <h3>Titre:</h3>
+        <input
+          type="text"
+          placeholder="Ex: Finish Report, Analyse data... "
+          formControlName="title"
+          required
+        />
+    </div>
+    <div class="input-group" >
+        <h3>Description:</h3>
+        <textarea
+          type="text"
+          style="min-height:150px;padding-top: 20px;"
+          placeholder="Describe the probleme or assignment, Be Clear and thorough to avoid any misundertanding... "
+          formControlName="description"
+          required
+        ></textarea>
+    </div>
+    <div class="input-group" style="display: flex; gap:20px; align-items: center;" >
+        <h3>Assign to:</h3>
+        <select
+          id="emp"
+          formControlName="emp"
+          required
+        >
+        <option *ngFor="let p of  AllEmps" [value]="p._id" >  {{p.firstName}} {{p.lastName}} ({{p.job}}) </option>
+      </select>
+    </div>
+
+    <div class="input-group" style="display: flex; gap:20px; align-items: center;">
+        <h3>Priority:</h3>
+        <select
+          id="priority"
+          formControlName="priority"
+          required
+        >
+        <option *ngFor="let cat of  ['Low' , 'Medium' , 'High' , 'Urgent']" [value]="cat" >  {{cat}}</option>
+      </select>
+      </div>
+      <div class="input-group" >
+        <h3>Deadline:</h3>
+        <input
+          type="date"
+          id="deadline"
+          formControlName="deadline"
+          required
+        />
+      </div>
+
+      <button type="submit" class="create">Create</button>
+
+</form>
