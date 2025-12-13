@@ -8,10 +8,11 @@ import { AuthService } from '../../cookies/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from '../../../environments/environment';
 import { Chatbot } from '../../components/chatbot/chatbot';
+import { Compticket } from '../../components/compticket/compticket';
 
 @Component({
   selector: 'app-admin',
-  imports: [CommonModule, Compemployee, Compnotification,Editprofile,DocumentsComponent,Chatbot],
+  imports: [CommonModule, Compemployee, Compnotification,Editprofile,DocumentsComponent,Chatbot,Compticket],
   templateUrl: './admin.html',
   styleUrl: './admin.css',
 })

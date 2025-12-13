@@ -1,0 +1,111 @@
+<main>
+    <div id="head">
+    <input [(ngModel)]="searchterm" type="text" placeholder="Search for ticket by title...">
+    <img src="images/SearchIcon.png" width="20px" height="20px" id="searchicon">
+    <h3>status:</h3>
+    <select [(ngModel)]="status">
+        <option value="">Any</option>
+        <option *ngFor="let cat of  ['In Progress' , 'Closed' , 'Pending']" [value]="cat" >  {{cat}}</option>
+    </select>
+    <h3>priority:</h3>
+    <select [(ngModel)]="priority">
+        <option value="">Any</option>
+        <option *ngFor="let cat of  ['Low', 'Medium' , 'High' , 'Urgent']" [value]="cat" >  {{cat}}</option>
+    </select>
+    </div>
+    <div id="rest">
+        <div id="sidebar">
+            <h4 style="margin-left:10px;">All Tickets &nbsp; ({{ticks.length}} Total)</h4>
+            <div *ngFor="let tick of filter()" id="member" (click)="select(tick)">
+                <h3>Ticket N°{{tick._id}}</h3>
+                <h3 *ngIf="type != 'manager'">Assigned by: {{tick.chef.firstName}} {{tick.chef.lastName}} </h3>
+                <h3 *ngIf="type != 'employee'">Assigned to: {{tick.emp.firstName}} {{tick.emp.lastName}} </h3>
+                <div style="display: flex; gap:10px">
+                    <h4>Status: </h4>
+                    <h4 class="ticketstatus">{{tick.status}}</h4>
+                </div>
+            </div>
+            
+        </div>
+         <div *ngIf="selected && !editing && !chatting" id="description">
+            <h2>{{selected.title}}</h2>
+            <h4>Deadline: {{date(selected.deadline) }} </h4>
+            <div  id="buttons">
+                    <button *ngIf="type!='employee'" id="edit" (click)="edit()">Edit</button>
+                    <button *ngIf="type!='employee'" id="delete" (click)="delete()">Delete</button>
+                    <button *ngIf="type=='employee' && selected.status =='In Progress'" id="markfinished" (click)="markfinished()">Mark As Finished</button>
+                    <button *ngIf="type!='admin'" id="chat" (click)="openchat()">Open Chat</button>
+
+            </div>
+            <div class="information">
+                <h5>Priority: {{selected.priority}}</h5>
+                <h5>Status: {{selected.status}}</h5>
+                <h5>Rating: {{selected.rating}} &starf; </h5>
+            </div>
+            <div class="information" >
+                <h4>Description:</h4>
+                <h5>{{selected.description}}</h5>
+            </div>
+        </div>
+    <form *ngIf="editing"  [formGroup]="ticketForm" (ngSubmit)="onSubmit()" class="form">
+      <div class="input-group" >
+        <h3>Titre:</h3>
+        <input
+          type="text"
+          placeholder="Ex: Finish Report, Analyse data... "
+          formControlName="title"
+          required
+        />
+    </div>
+    <div class="input-group" >
+        <h3>Description:</h3>
+        <textarea
+          type="text"
+          style="min-height:150px;padding-top: 20px;"
+          placeholder="Describe the probleme or assignment, Be Clear and thorough to avoid any misundertanding... "
+          formControlName="description"
+          required
+        ></textarea>
+    </div>
+    
+
+    <div class="input-group" style="display: flex; gap:20px; align-items: center;">
+        <h3>Priority:</h3>
+        <select
+          id="priority"
+          formControlName="priority"
+          required
+        >
+        <option *ngFor="let cat of  ['Low' , 'Medium' , 'High' , 'Urgent']" [value]="cat" >  {{cat}}</option>
+      </select>
+      </div>
+      <div class="input-group" style="display: flex; gap:20px; align-items: center;">
+        <h3>Status:</h3>
+        <select
+          id="priority"
+          formControlName="status"
+          required
+        >
+        <option *ngFor="let cat of  ['In Progress' , 'Closed' , 'Pending']" [value]="cat" >  {{cat}}</option>
+      </select>
+      </div>
+      <div class="input-group" >
+        <h3>Deadline:</h3>
+        <input
+          type="date"
+          id="deadline"
+          formControlName="deadline"
+          required
+        />
+      </div>
+
+      <button type="submit" >Save Changes</button>
+    </form>
+    <div id="chat" *ngIf="chatting">
+      <h1 style="color: navy">Chat:</h1>
+      <app-chat-box [chatId]="selected.chatID" [userId]="curr"></app-chat-box>
+
+    </div>
+    </div>
+  </main>
+

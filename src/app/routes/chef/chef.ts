@@ -8,10 +8,11 @@ import { CookieService } from 'ngx-cookie-service';
 import { environment } from '../../../environments/environment';
 import { Chatbot } from '../../components/chatbot/chatbot';
 import { Compcreateticket } from './compcreateticket/compcreateticket';
+import { Compticket } from '../../components/compticket/compticket';
 
 @Component({
   selector: 'app-chef',
-  imports: [CommonModule, Compemployee,Editprofile,DocumentsComponent,Chatbot,Compcreateticket],
+  imports: [CommonModule, Compemployee,Editprofile,DocumentsComponent,Chatbot,Compcreateticket,Compticket],
   templateUrl: './chef.html',
   styleUrl: './chef.css',
 })

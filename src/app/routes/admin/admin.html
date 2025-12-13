@@ -41,5 +41,6 @@
     <editprofile (userevent)="handleuser($event)" [user]="curr" *ngIf="lastbtn==1"></editprofile>
     <documents [currentUserId]="curr._id" [role]="'admin'" *ngIf="lastbtn==2"></documents>
     <app-chatbot *ngIf="lastbtn==7" [userID]="curr._id"></app-chatbot>
+    <compticket *ngIf="lastbtn==5" [curr]="curr._id" [type]="'admin'"  ></compticket>
     </div>
 </main>

@@ -41,6 +41,7 @@
     <documents [currentUserId]="curr._id" [role]="'manager'" *ngIf="lastbtn==2"></documents>
     <app-chatbot *ngIf="lastbtn==7" [userID]="curr._id"></app-chatbot>
     <compcreateticket *ngIf="lastbtn==5"></compcreateticket>
+    <compticket *ngIf="lastbtn==4" [curr]="curr._id" [type]="'manager'"  ></compticket>
     </div>
 </main>
 

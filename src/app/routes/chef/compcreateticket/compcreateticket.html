@@ -23,10 +23,10 @@
         <h3>Assign to:</h3>
         <select
           id="emp"
-          formControlName="emp"
+          formControlName="employee"
           required
         >
-        <option *ngFor="let p of  AllEmps" [value]="p._id" >  {{p.firstName}} {{p.lastName}} ({{p.job}}) </option>
+        <option *ngFor="let p of  AllEmps" [ngValue]="p" >  {{p.firstName}} {{p.lastName}} ({{p.job}}) </option>
       </select>
     </div>
 

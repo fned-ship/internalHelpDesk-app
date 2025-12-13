@@ -7,9 +7,10 @@ import { CommonModule } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from '../../../environments/environment';
 import { Chatbot } from '../../components/chatbot/chatbot';
+import { Compticket } from '../../components/compticket/compticket';
 @Component({
   selector: 'app-employee',
-  imports: [CommonModule, Compemployee,Editprofile,DocumentsComponent,Chatbot],
+  imports: [CommonModule, Compemployee,Editprofile,DocumentsComponent,Chatbot,Compticket],
   templateUrl: './employee.html',
   styleUrl: './employee.css',
 })
@@ -22,6 +23,7 @@ export class Employee implements OnInit {
   
 
  ngOnInit(): void {
+  console.log("hello")
    this.authService.checkAndRedirect("employee");
    this.curr=JSON.parse(this.cookieService.get("user"))
  }

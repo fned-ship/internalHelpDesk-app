@@ -1,6 +1,6 @@
 <main>
     <div id="head">
-    <input [(ngModel)]="searchterm" type="text" placeholder="Search for employee by name...">
+    <input [(ngModel)]="searchterm" type="text" placeholder="Search for member by name...">
     <img src="images/SearchIcon.png" width="20px" height="20px" id="searchicon">
     </div>
     <div id="rest">
@@ -43,8 +43,8 @@
             <div *ngIf="recentactivity">
                 <h4>Recent Activity:</h4>
                 <h5>Ticket: {{recentactivity.description}} </h5>
-                <h5>Assigned by: Youssef Fned </h5>
-                <h5>Status: Incompelete </h5>
+                <h5>Assigned by: {{recentactivity.chef.firstName}} {{recentactivity.chef.lastName}} </h5>
+                <h5>Status: {{recentactivity.status}} </h5>
             </div>
             <div *ngIf="! recentactivity">
                 <h4>Recent Activity:</h4>

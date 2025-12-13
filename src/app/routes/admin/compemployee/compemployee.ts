@@ -89,8 +89,10 @@ export class Compemployee implements OnInit {
     select(emp:any){
       this.selected=emp;
       this.editing=false;
-      const res= this.ts.getLastTicket(this.selected.id)
-      console.log(res)
+      const res= this.ts.getLastTicket(this.selected.id).subscribe({
+    next: (response) => console.log(response.data),
+    error: (err) => console.error('Error:', err)});
+      
     }
 
     edit(){

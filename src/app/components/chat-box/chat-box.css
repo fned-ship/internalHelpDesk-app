@@ -1,9 +1,12 @@
 .chat-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 55vh;
+  width: 55vw;
   background-color: #000000;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  border: 2px solid rgb(44, 179, 241);
+  border-radius: 10px;
 }
 
 .messages-wrapper {

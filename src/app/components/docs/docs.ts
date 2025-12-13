@@ -22,7 +22,7 @@ export class DocumentsComponent implements OnInit {
   selectedFilter: string = 'recents';
   selectedDocument: any = null;
   showUploadModal: boolean = false;
-  // currentUserId: string = '691a40dfd4643af9391098d7';
+  // currentUserId: string = '691cb3518be8df6fae1199a4';
   
   uploadFile: File | null = null;
   uploadComment: string = '';
@@ -122,7 +122,7 @@ export class DocumentsComponent implements OnInit {
 
   canDelete(doc: Document): boolean {
 
-    return this.role === 'admin' || doc.userId._id === this.currentUserId;
+    return this.role === 'admin' || doc.userId?._id === this.currentUserId;
   }
 
   openUploadModal(): void {
