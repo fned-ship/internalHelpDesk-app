@@ -59,6 +59,7 @@ export class ChatBox implements OnInit, OnDestroy, AfterViewChecked {
   constructor(private http: HttpClient,private userService:UserService,private ticketService:TicketService) {}
 
   async ngOnInit() {
+
     this.initializeSocket();
     this.loadInitialMessages();
 

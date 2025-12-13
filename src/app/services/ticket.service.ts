@@ -54,10 +54,10 @@ export class TicketService {
 
 
   // ticket id ( not _id )
-  updateTicketDescription(ticketId: string, description: string): Observable<ApiResponse<Ticket>> {
+  updateTicket(ticketId: string, data : any): Observable<ApiResponse<Ticket>> {
     return this.http.put<ApiResponse<Ticket>>(
       `${this.apiUrl}/updateticket/${ticketId}`,
-      { description }
+      { data }
     );
   }
 
