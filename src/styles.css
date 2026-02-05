@@ -110,4 +110,6 @@ label{
 }
 body{
   font-family: "Inter";
+  width: 100%;
+  overflow-x: hidden;
 }

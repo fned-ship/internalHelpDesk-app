@@ -2,7 +2,7 @@
     <div id="head">
     
     <div id="corner"><h1>Admin Space</h1></div>
-    <img [src]="serverUrl+'/imagesProfile/'+curr.imageSrc" width="60px" height="60px" style="border-radius: 50%;">
+    <img [src]="serverUrl+'/imagesProfile/'+curr.imageSrc" width="60px" height="60px" style="border-radius: 50%;" alt="pdp">
     <h2>{{curr.firstName}} {{curr.lastName}}</h2>
     <div id="rightside">
     <div id="ai" (click)="lastbtn=7">
@@ -28,7 +28,7 @@
         </div>
         <div class="btn" (click)="lastbtn=4">
             <img src="images/clientIcon.png" width="40px" height="40px" >
-            <h3> Chef </h3>
+            <h3> Manager </h3>
         </div>
         <div class="btn" (click)="lastbtn=5">
             <img src="images/ticketIcon.png" width="40px" height="40px">

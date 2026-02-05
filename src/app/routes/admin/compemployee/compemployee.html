@@ -17,14 +17,14 @@
         </div>
          <div *ngIf="selected && !editing" id="description">
             <div id="namepdp">
-            <img [src]="serverUrl+'/imagesProfile/'+selected.imageSrc" width="70px" height="70px">
+            <img [src]="serverUrl+'/imagesProfile/'+selected.imageSrc" width="70px" height="70px" alt="pdp">
             <h2>{{selected.firstName}} {{selected.lastName}}</h2>
             </div>
             <h4>Joined on: {{date(selected.createdAt) }} </h4>
             <div *ngIf="role=='admin'" id="buttons">
                     <button id="edit" (click)="edit()">Edit</button>
                     <button id="delete" (click)="delete()">Delete</button>
-                    <button *ngIf="type=='employee'" id="upgrade" (click)="upgrade()">Upgrade Employee to Chef</button>
+                    <button *ngIf="type=='employee'" id="upgrade" (click)="upgrade()">Upgrade Employee to Manager</button>
 
             </div>
             <div id="informations">
@@ -32,7 +32,7 @@
                 <h4>Informations Generales:</h4>
                 <h5>Titre: {{selected.job}}</h5>
                 <h5>Departement: Informatique</h5>
-                <h5>Rating: {{selected.rating}} &starf; (based on {{selected.numberOfTickets}}reviews) </h5>
+                <h5>Rating: {{selected.rating}} &starf; (based on {{selected.numOfTickets}}reviews) </h5>
             </div>
             <div>
                 <h4>Contact:</h4>
@@ -40,13 +40,14 @@
                 <h5>Phone number: {{selected.number}}</h5>
                 <h5>Home adresse: {{selected.address}} </h5>
             </div>
-            <div *ngIf="recentactivity">
+            <div *ngFor="let tick of recentactivity">
                 <h4>Recent Activity:</h4>
-                <h5>Ticket: {{recentactivity.description}} </h5>
-                <h5>Assigned by: {{recentactivity.chef.firstName}} {{recentactivity.chef.lastName}} </h5>
-                <h5>Status: {{recentactivity.status}} </h5>
+                <h5>Ticket: {{tick.title}} </h5>
+                <h5 *ngIf="type != 'manager'">Assigned by: {{tick.chef.firstName}} {{tick.chef.lastName}} </h5>
+                <h5 *ngIf="type != 'employee'">Assigned to: {{tick.emp.firstName}} {{tick.emp.lastName}} </h5>
+                <h5>Status: {{tick.status}} </h5>
             </div>
-            <div *ngIf="! recentactivity">
+            <div *ngIf="recentactivity.length==0 " >
                 <h4>Recent Activity:</h4>
                 <h5>This user has no recent activity </h5>
             </div>

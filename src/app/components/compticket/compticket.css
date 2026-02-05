@@ -147,3 +147,8 @@ button:focus{
 .ng-invalid.ng-touched,.ng-invalid.ng-dirty{
     border-color: red;
 }
+.rate>button{
+    background-color: transparent; 
+    border: transparent;
+    font-size: xx-large;
+}

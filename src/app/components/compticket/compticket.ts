@@ -22,6 +22,7 @@ export class Compticket implements OnInit {
       priority:string="";
       editing:boolean=false;
       chatting:boolean=false;
+      rating:number=0;
       ticketForm!: FormGroup;
   constructor( private fb:FormBuilder, private ts:TicketService) { }
 
@@ -48,12 +49,34 @@ export class Compticket implements OnInit {
       temp = temp.filter(tick =>
         tick.title.toLowerCase().includes(term) && tick.status.includes(this.status) && tick.priority.includes(this.priority)
       );
+      console.log(temp)
     return(temp)
     }
     async onSubmit(){
       if(this.ticketForm.valid){
-        let data=this.ticketForm.value
+        console.log(this.ticketForm.value)
+        this.ts.updateTicket(this.selected.id,this.ticketForm.value).subscribe({
+        next: (response) => {this.selected=response.data;
+          if(this.type!="admin"){
+      this.ts.getTicketsByUserId(this.curr).subscribe({
+    next: (response) => this.ticks=response.data,
+    error: (err) => console.error('Error:', err)});
+       }else{
+        this.ts.getAllTickets().subscribe({
+    next: (response) => this.ticks=response.body,
+    error: (err) => console.error('Error:', err)}); 
+    }
+        },
+        error: (err) => console.error('Error----:', err)
+    });
+    
       }
+      if(this.rating != this.selected.rating){
+        this.ts.rateTicket(this.selected.id,this.rating).subscribe({
+        next: (response) => this.selected.rating=this.rating ,
+        error: (err) => console.error('Error----:', err)
+    });
+     }
     }
     select(emp:any){
       this.selected=emp;
@@ -68,20 +91,41 @@ export class Compticket implements OnInit {
       description: [this.selected.description, Validators.required],
       status: [this.selected.status, Validators.required],
       priority: [this.selected.priority, Validators.required],
-      deadline: [this.selected.priority, Validators.required],
+      deadline: [this.selected.deadline, Validators.required],
     });
     this.editing=true;
       }
     }
     async delete(){
       console.log("deletin")
+      this.ts.deleteTicket(this.selected._id)
       }
     openchat(){
       this.chatting=true;
     }
 
     async markfinished(){
-      console.log("marked as finished!")
+      this.ts.updateTicket(this.selected.id,{status:"Pending"}).subscribe({
+        next: (response) => {this.selected=response.data;
+      this.ts.getTicketsByUserId(this.curr).subscribe({
+    next: (response) => this.ticks=response.data,
+    error: (err) => console.error('Error:', err)});},
+        error: (err) => console.error('Error----:', err)
+    });}
+       
+
+    color(i:number){
+    let element;
+    for(let j=1;j<=i;j++){
+      element =document.getElementById("star"+j) as HTMLElement
+      element.style.color="gold"
     }
+    for(let j=i+1;j<=5;j++){
+      element =document.getElementById("star"+j) as HTMLElement
+      element.style.color="gray"
+    }
+    this.rating=i
+    console.log("tick got ", i)
+  }
   
 }

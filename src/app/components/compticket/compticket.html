@@ -22,7 +22,9 @@
                 <h3 *ngIf="type != 'employee'">Assigned to: {{tick.emp.firstName}} {{tick.emp.lastName}} </h3>
                 <div style="display: flex; gap:10px">
                     <h4>Status: </h4>
-                    <h4 class="ticketstatus">{{tick.status}}</h4>
+                    <h4 *ngIf="tick.status=='In Progress'" style="color:green">In Progress</h4>
+                    <h4 *ngIf="tick.status=='Closed'" style="color:rgb(96, 0, 128)">Closed</h4>
+                    <h4 *ngIf="tick.status=='Pending'" style="color:rgb(255, 174, 0)">Pending</h4>
                 </div>
             </div>
             
@@ -40,7 +42,7 @@
             <div class="information">
                 <h5>Priority: {{selected.priority}}</h5>
                 <h5>Status: {{selected.status}}</h5>
-                <h5>Rating: {{selected.rating}} &starf; </h5>
+                <h5>Rating: {{selected.rating == 0 ? 'no rating given':selected.rating}} &starf; </h5>
             </div>
             <div class="information" >
                 <h4>Description:</h4>
@@ -98,8 +100,18 @@
           required
         />
       </div>
+      <div class="rate" style="display: flex; gap:20px" *ngIf="type=='manager'">
+    <h3>Rating: </h3>
+    <button type="button" (click)="color(1)" id="star1">&starf;</button>
+    <button type="button" (click)="color(2)" id="star2">&starf;</button>
+    <button type="button" (click)="color(3)" id="star3">&starf;</button>
+    <button type="button" (click)="color(4)" id="star4">&starf;</button>
+    <button type="button" (click)="color(5)" id="star5">&starf;</button>
+
+  </div>
 
       <button type="submit" >Save Changes</button>
+      <button type="button" style="background-color: rgb(100, 35, 5); right:150px" (click)="editing=false" >Back</button>
     </form>
     <div id="chat" *ngIf="chatting">
       <h1 style="color: navy">Chat:</h1>
